@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+<h1>Login</h1>
+<form id="loginForm">
+<input type="text" id="usuario" placeholder="Usuário" required>
+<input type="password" id="senha" placeholder="Senha" required>
+<div id="errorMsg"></div>
+<div id="sucessoMsg"></div>
+<button type="submit" class="btn">Entrar</button>
+</form>
+<a href="registro.html" class="link">Criar Conta</a>
+<a href="index.html" class="link">Voltar</a>
+</div>
+
+<script>
+const form=document.getElementById('loginForm');
+const errorMsg=document.getElementById('errorMsg');
+const sucessoMsg=document.getElementById('sucessoMsg');
+const usuarioInput=document.getElementById('usuario');
+const senhaInput=document.getElementById('senha');
+
+if(localStorage.getItem('usuarioLogado')) window.location.href='home.html';
+
+function checarUsuario(){
+    const usuario=usuarioInput.value.trim();
+    const senha=senhaInput.value;
+    const usuarios=JSON.parse(localStorage.getItem('usuarios'))||[];
+    const user=usuarios.find(u=>u.usuario===usuario);
+    if(usuario===""||senha===""){errorMsg.textContent='';sucessoMsg.textContent='';return;}
+    if(!user){errorMsg.textContent='Usuário não encontrado!';sucessoMsg.textContent='';}
+    else if(user.senha!==senha){errorMsg.textContent='Senha incorreta!';sucessoMsg.textContent='';}
+    else{errorMsg.textContent='';sucessoMsg.textContent='Usuário correto! Pronto para entrar.';}
+}
+
+usuarioInput.addEventListener('input',checarUsuario);
+senhaInput.addEventListener('input',checarUsuario);
+
+form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const usuario=usuarioInput.value.trim();
+    const senha=senhaInput.value;
+    const usuarios=JSON.parse(localStorage.getItem('usuarios'))||[];
+    const user=usuarios.find(u=>u.usuario===usuario && u.senha===senha);
+    if(user){localStorage.setItem('usuarioLogado',usuario);window.location.href='home.html';}
+    else{errorMsg.textContent='Usuário ou senha incorretos!';sucessoMsg.textContent='';}
+});
+</script>
+</body>
+</html>

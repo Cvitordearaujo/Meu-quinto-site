@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo!</title>
+    <link rel="stylesheet" href="iniciostyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="greeting">Olá! 👋</h1>
+        <input type="text" id="nameInput" placeholder="Digite seu nome">
+        <button id="submitName" onclick="showGreeting()">Confirmar</button>
+        <!-- Botão que aparece depois -->
+        <button id="enterButton" onclick="enterSite()" style="display:none;">Entrar</button>
+    </div>
+
+    <script>
+        function showGreeting() {
+            const name = document.getElementById('nameInput').value.trim();
+            const greeting = document.getElementById('greeting');
+
+            if(name) {
+                greeting.textContent = `Olá, ${name}! 👋 Seja bem-vindo(a)!`;
+                document.getElementById('nameInput').style.display = 'none';
+                document.getElementById('submitName').style.display = 'none';
+                // Mostrar botão de entrar
+                document.getElementById('enterButton').style.display = 'inline-block';
+            } else {
+                alert("Por favor, digite seu nome!");
+            }
+        }
+
+        function enterSite() {
+            // Redireciona para index.html
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

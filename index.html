@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página Inicial</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+    <h1>Bem-vindo 🎉</h1>
+    <p>Escolha uma opção para entrar ou criar sua conta.</p>
+    <a href="login.html" class="btn">Login</a>
+    <a href="registro.html" class="btn" style="margin-left:15px;">Criar Conta</a>
+</div>
+<script>
+if(localStorage.getItem('usuarioLogado')){
+    window.location.href = 'home.html';
+}
+</script>
+</body>
+</html>
